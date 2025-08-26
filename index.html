@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interaktif Fun</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #ffcccc, #ffe6f0);
+}
+
+.frame {
+    border: 10px solid #000;
+    padding: 30px;
+    text-align: center;
+    background: rgba(255,255,255,0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 15px #000;
+    width: 400px;
+    position: relative;
+}
+
+input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 18px;
+    border: 2px solid #000;
+    border-radius: 5px;
+}
+
+button {
+    padding: 12px 25px;
+    margin: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 3px solid #000;
+    cursor: pointer;
+    border-radius:5px;
+    background-color: #2E8B57;
+    color: #fff;
+    transition: 0.2s;
+}
+
+button:hover {
+    background-color: #3CB371;
+}
+
+.hidden { display: none; }
+
+#popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 5px solid #000;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #000;
+    width: 350px;
+    text-align: center;
+    z-index: 2;
+}
+
+#mirip {
+    position: absolute;
+}
+
+</style>
+</head>
+<body>
+
+<!-- Stage 1 -->
+<div id="stage1" class="frame">
+    <h2>Tanya Nama</h2>
+    <input type="text" id="nameInput" placeholder="Masukkan Nama"><br>
+    <button onclick="showPopup()">Lanjut</button>
+</div>
+
+<!-- Popup Stage 2 -->
+<div id="popup" class="hidden">
+    <h2>Admin ganteng gak?</h2>
+    <button onclick="alert('Yeay, kamu memilih Ganteng!')">Ganteng</button>
+    <button id="mirip">Mirip Anomali</button>
+</div>
+
+<script>
+const popup = document.getElementById('popup');
+const miripBtn = document.getElementById('mirip');
+
+function showPopup(){
+    const name = document.getElementById('nameInput').value;
+    if(name.trim() === ""){
+        alert("Tolong isi nama dulu!");
+        return;
+    }
+    document.getElementById('stage1').classList.add('hidden');
+    popup.classList.remove('hidden');
+}
+
+// Tombol Mirip Anomali bergerak terus
+function moveButton(){
+    const maxX = window.innerWidth - miripBtn.offsetWidth - 20;
+    const maxY = window.innerHeight - miripBtn.offsetHeight - 20;
+    const x = Math.floor(Math.random() * maxX);
+    const y = Math.floor(Math.random() * maxY);
+    miripBtn.style.left = x + 'px';
+    miripBtn.style.top = y + 'px';
+}
+
+// Gerak terus setiap 500ms
+setInterval(moveButton, 500);
+</script>
+
+</body>
+</html>
